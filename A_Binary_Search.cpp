@@ -5,10 +5,12 @@
 using namespace __gnu_pbds;
 using namespace std;
 
-template <class T> using pbds = tree<T, null_type,
-less<T>, rb_tree_tag,tree_order_statistics_node_update>;
+template <class T>
+using pbds = tree<T, null_type,
+                  less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
-int main(){
+int main()
+{
   ios_base::sync_with_stdio(false);
   cin.tie(NULL);
 
@@ -24,7 +26,7 @@ int main(){
   vector<int> secondVector(k);
   for (int i = 0; i < k; i++)
   {
-    cin >> secondVector[k];
+    cin >> secondVector[i];
   }
 
   for (int i = 0; i < k; i++)
@@ -32,17 +34,36 @@ int main(){
     int l = 0;
     int r = n - 1;
 
-    while (l < r)
-    {
-        int mid = (l + r) / 2;
+    bool flag = false;
 
-        
+    while (l <= r)
+    {
+      int mid = (l + r) / 2;
+
+      if (secondVector[i] == firstVector[mid])
+      {
+        flag = true;
+        break;
+      }
+      else if (secondVector[i] < firstVector[mid])
+      {
+        r = mid - 1;
+      }
+      else
+      {
+        l = mid + 1;
+      }
     }
-    
+
+    if (flag)
+    {
+      cout << "YES\n";
+    }
+    else
+    {
+      cout << "NO\n";
+    }
   }
-  
-  
-  
 
   return 0;
 }
