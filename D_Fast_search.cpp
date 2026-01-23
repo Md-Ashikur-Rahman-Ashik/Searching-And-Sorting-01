@@ -26,19 +26,54 @@ int main()
     sort(v.begin(), v.end());
 
     int k;
+    cin >> k;
+
     while (k--)
     {
         int firstValue, secondValue;
         cin >> firstValue >> secondValue;
 
-        int count = 0;
+        int rightAns = -1;
 
         int l = 0, r = n - 1;
-
         while (l <= r)
         {
             int mid = (l + r) / 2;
-            
+            if (v[mid] <= secondValue)
+            {
+                rightAns = mid;
+                l = mid + 1;
+            }
+            else
+            {
+                r = mid - 1;
+            }
+        }
+
+        int leftAns = -1;
+
+        l = 0, r = n - 1;
+        while (l <= r)
+        {
+            int mid = (l + r) / 2;
+            if (v[mid] >= firstValue)
+            {
+                leftAns = mid;
+                r = mid - 1;
+            }
+            else
+            {
+                l = mid + 1;
+            }
+        }
+
+        if (rightAns == -1 || leftAns == -1)
+        {
+            cout << 0 << " ";
+        }
+        else
+        {
+            cout << rightAns - leftAns + 1 << " ";
         }
     }
 
